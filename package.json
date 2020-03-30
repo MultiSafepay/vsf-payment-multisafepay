@@ -1,0 +1,11 @@
+{
+  "name": "vsf-payment-multisafepay",
+  "version": "1.0.0",
+  "description": "MultiSafepay Payment service for Vue Storefront",
+  "main": "index.ts",
+  "author": "Raúl Mena <raul.mena@multisafepay.com>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
