@@ -26,15 +26,19 @@ First, make sure you meet these requirements for your Magento 2 installation.
 
 # Requirements for Magento 2
 
-MultiSafepay Payments for Magento 2 module installed, you can get it here: https://github.com/MultiSafepay/Magento2Msp - you can follow the installation steps in the README file.
+The requirements for the MultiSafepay Payments for Magento 2 module can be found [here](https://github.com/MultiSafepay/Magento2Msp)
+
+Please follow the installation steps in the README file.
 
 # Requirements for Vue Storefront API
 
-Add the Vue Storefront API extension we created for the MultiSafepay Payments API: https://github.com/MultiSafepay/vsf-multisafepay-service-api - you can follow the installation steps in the README.
+Add the Vue Storefront API extension we created for the [MultiSafepay Payments API](https://github.com/MultiSafepay/vsf-multisafepay-service-api)
+
+Please follow the installation steps in the README file.
 
 # Requirements for Vue Storefront
 
-After making sure to meet the above mentioned requirements, please follow the next steps to integrate this module in Vue Storefront.
+After making sure that the abovementioned requirements are met, please follow the next steps to integrate this module to Vue Storefront.
 
 Clone this git repository from within your vue-storefront root folder
 
@@ -136,7 +140,7 @@ import PaymentMethods from "src/modules/vsf-payment-multisafepay/components/Paym
 
 To enable payment methods in your Vue Storefront checkout you have to follow these steps:
 
-1. Enable the payment method in your MultiSafepay dashboard
+1. Enable the payment method in your MultiSafepay Control
 2. Enable the payment method in the MultiSafepay Payments for Magento 2 module in your Magento 2 backend system
 3. Add the payment methods to the payment_methods_mapping property in the order property config.
 
@@ -161,7 +165,7 @@ Here is a example:
 
 ```
 
-To display also the images of each payment methods you have to below payment_methods_mapping the mapping for images, just copy and paste this:
+To display the images of each payment methods you have to below payment_methods_mapping the mapping for images, just copy and paste the following code:
 
 ```json
     "payment_methods_mapping_img": {
