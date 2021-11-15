@@ -4,68 +4,54 @@
 
 # MultiSafepay Payment Service module for Vue Storefront v1.11.1
 
-MultiSafepay Payments API integration for Vue Storefront with Magento 2 as backend system.
+MultiSafepay Payments API integration for Vue Storefront with Magento 2.
 
 ## About MultiSafepay
 
-MultiSafepay is a collecting payment service provider which means we take care of the agreements, technical details and payment collection required for each payment method. You can start selling online today and manage all your transactions from one place.
+MultiSafepay is a collecting payment service provider which means we take care of the agreements, technical details, and payment collection for each payment method. You can start selling online today and manage all your transactions from one place.
 
 ![order-status](https://user-images.githubusercontent.com/54272995/77526252-91dddd00-6e8a-11ea-8985-b916a3d067f9.png)
 
-Image shown above is the order status page after the customer successfullly paid for an order.
+Order status page after the customer has successfullly paid.
 
 # Requirements
 
-- To use this module you need a MultiSafepay account. You can create a test account on https://testmerchant.multisafepay.com/signup
+To use this module, you need a MultiSafepay account, or [create a test account](https://testmerchant.multisafepay.com/signup).
 
-# Installation Guide
+# Installation guide
 
-Follow these steps to install this module in Vue Storefront.
+To install this module in Vue Storefront, follow these steps:
 
-First, make sure you meet these requirements for your Magento 2 installation.
+1. Make sure you meet the [requirements for your Magento 2 installation](https://github.com/MultiSafepay/Magento2Msp), and then follow the installation steps in the README file.
 
-# Requirements for Magento 2
+2. Add the Vue Storefront API extension we created for the [MultiSafepay Payments API](https://github.com/MultiSafepay/vsf-multisafepay-service-api), and then  follow the installation steps in the README file.
 
-The requirements for the MultiSafepay Payments for Magento 2 module can be found [here](https://github.com/MultiSafepay/Magento2Msp)
-
-Please follow the installation steps in the README file.
-
-# Requirements for Vue Storefront API
-
-Add the Vue Storefront API extension we created for the [MultiSafepay Payments API](https://github.com/MultiSafepay/vsf-multisafepay-service-api)
-
-Please follow the installation steps in the README file.
-
-# Requirements for Vue Storefront
-
-After making sure that the abovementioned requirements are met, please follow the next steps to integrate this module to Vue Storefront.
-
-Clone this git repository from within your vue-storefront root folder
+3. To integrate this module into Vue Storefront, clone this git repository from within your vue-storefront root folder:
 
 ```shell
 git clone git@github.com:MultiSafepay/vsf-payment-multisafepay.git src/modules/vsf-payment-multisafepay
 ```
 
-# Module registration
+# Register the module 
 
-Open `src/modules/client.ts`
+1. Open `src/modules/client.ts`
 
-Add:
+2. Add:
 
 ```ts
 ...
 import { MultiSafePayPaymentModule } from './vsf-payment-multisafepay'
 ```
 
-And make sure to also register the module in registerClientModules
+3. Make sure you also register the module in registerClientModules:
 
 ```js
 registerModule(MultiSafePayPaymentModule);
 ```
 
-# Add configuration settings
+# Add the configuration settings
 
-Add the config properties in `config/local.json`
+1. Add the config properties in `config/local.json`
 
 ```json
 "paymentService": {
@@ -73,19 +59,19 @@ Add the config properties in `config/local.json`
 },
 ```
 
-Make sure to set the correct location to your API and the routes to the CMS pages in case of an error or an invalid payment status check.
+2. Make sure you set the correct location to your API and the routes to the CMS pages in case of an error or an invalid payment status check.
 
-# Integration to theme
+# Integrate the theme
 
-We used the default theme, below we'll sum up the changes that are necessary to completely integrate this module to your own theme if you're not using Vue Storefront default theme. We create a isolate components for separate the logic from VSF core but it's necessary to make a few small changes on the core as well.
+We used the default Vue Storefront theme. If using your own theme, make the following changes. We created isolated components to separate the logic from VSF core you also to make a few small changes on the core.
 
-- Copy and paste the checkout page as we change one v-show condition of thank you page to v-if
+1. Copy and paste the checkout page as we change one v-show condition of the thank you page to v-if
 
 ```html
 <thank-you-page v-if="isThankYouPage" />
 ```
 
-- As we redirect to MultiSafepay gateweay after placed the order VSF show the default ThankYouPage so we have to add here a notification on the created method. You can copy and paste the file.
+2. As we redirect to the MultiSafepay gateweay after placing the order, VSF shows the default thank you page so copy and paste the file to add a notification on the created method. 
 
 ```js
 created(){
@@ -93,13 +79,13 @@ created(){
   },
 ```
 
-- Add PaymentMethods component into Payment checkout component to display Multisafepay payment methods, you can do with two differents approaches:
+3. To display Multisafepay payment methods, add the `PaymentMethods` component into the `Payment checkout component` in one of the following two ways:
 
-1º You can copy/paste the Payment component from this module to your default theme
+- Copy and paste the Payment Component from this module to your default theme:
 
-Or
+**Or**
 
-2º The first one is removing the following code on Payment componet (core/blocks/Checkout/Payment.vue):
+- Remove the following code from the Payment Component (core/blocks/Checkout/Payment.vue):
 
 ```html
 <div v-for="(method, index) in paymentMethods" :key="index" class="col-md-6">
@@ -117,7 +103,7 @@ Or
 </div>
 ```
 
-And adding this one:
+And adding the following:
 
 ```html
 <payment-methods
@@ -128,7 +114,7 @@ And adding this one:
 ></payment-methods>
 ```
 
-Remember also to import the component and add it on component section:
+4. Import the component and add it to the component section:
 
 ```js
 import PaymentMethods from "src/modules/vsf-payment-multisafepay/components/PaymentMethods";
@@ -138,13 +124,13 @@ import PaymentMethods from "src/modules/vsf-payment-multisafepay/components/Paym
 
 # Manage payment methods
 
-To enable payment methods in your Vue Storefront checkout you have to follow these steps:
+To enable payment methods in your Vue Storefront checkout, follow these steps:
 
-1. Enable the payment method in your MultiSafepay Control
-2. Enable the payment method in the MultiSafepay Payments for Magento 2 module in your Magento 2 backend system
-3. Add the payment methods to the payment_methods_mapping property in the order property config.
+1. In your MultiSafepay account, enable the payment method. See the relevant [payment method page](/payments/methods/).
+2. In your Magento 2 backend, in the MultiSafepay Payments for Magento 2 module, enable the payment method.
+3. Add the payment method to the `payment_methods_mapping` property in the `order property` config.
 
-Here is a example:
+Example:
 
 ```json
 ...
@@ -165,7 +151,7 @@ Here is a example:
 
 ```
 
-To display the images of each payment methods you have to below payment_methods_mapping the mapping for images, just copy and paste the following code:
+To display the logo of each payment method, copy and paste the following code below `payment_methods_mapping_img`:
 
 ```json
     "payment_methods_mapping_img": {
@@ -184,13 +170,13 @@ To display the images of each payment methods you have to below payment_methods_
 
 ![payment-methods](https://user-images.githubusercontent.com/54272995/77526212-7ecb0d00-6e8a-11ea-8e9b-4d5fd9376c06.png)
 
-# Important notes
+# Note
 
-It's not yet possible to pay for orders that are placed when the user is offline.
+It's not yet possible to pay for orders placed when the user is offline.
 
 # Support
 
-If you have any issues, problems or questions you can create an issue on this repository or contact us at <a href="mailto:integrationt@multisafepay.com">integration@multisafepay.com</a>
+For support or questions, create an issue in this repository or email the Integration Team at <a href="mailto:integrationt@multisafepay.com">integration@multisafepay.com</a>
 
 # Thanks to Lakefields
 
@@ -200,6 +186,6 @@ Thanks to Lakefields as this project is based on their [integration](https://git
 
 [MIT License](https://github.com/MultiSafepay/vsf-payment-multisafepay/blob/master/LICENSE)
 
-# Want to be part of the team?
+# Join us
 
-Are you a developer interested in working at MultiSafepay? [View](https://www.multisafepay.com/careers/#jobopenings) our job openings and feel free to get in touch with us.
+Are you a developer interested in working at MultiSafepay? Check out our [job openings](https://www.multisafepay.com/careers/#jobopenings) and feel free to get in touch.
